@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Categories;
+use App\Models\Category;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -31,6 +31,6 @@ class CategoriesTableSeeder extends Seeder
             ['id' => 15, 'name' => 'Frozen food',    'name_pl' => 'Mrożonki'],
         ];
 
-        Categories::insert($categories);
+        Category::insert($categories);
     }
 }

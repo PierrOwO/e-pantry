@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Pantries extends Model
+class PantryUser extends Model
 {
 
     public $timestamps = false;
-    protected $table = 'pantries';
+    protected $table = 'pantry_users';
     protected $fillable = [
-        'name',
+        'pantry_id',
+        'user_id',
     ];
 }

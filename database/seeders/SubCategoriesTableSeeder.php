@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\SubCategories;
+use App\Models\SubCategory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -25,6 +25,6 @@ class SubCategoriesTableSeeder extends Seeder
             ['id' => 9, 'category_id' => 6, 'name' => 'Plant-based drinks', 'name_pl' => 'Napoje roślinne'],
         ];
 
-        SubCategories::insert($subCategories);
+        SubCategory::insert($subCategories);
     }
 }
