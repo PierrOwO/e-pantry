@@ -2,8 +2,8 @@
 import Button from '@/Components/Button.vue';
 defineProps({
     title: String,
-    b1: Number,
-    b2: Number,
+    b1: Boolean,
+    b2: Boolean,
   });
 </script>
 <template>
@@ -17,8 +17,8 @@ defineProps({
                 <slot></slot>
             </div>
             <div class="footer">
-                <Button v-if="b1 !== undefined && b1 === 1" class="button-footer background-color-orange" label="orange"/>
-                <Button v-if="b2 !== undefined && b2 === 1" class="button-footer background-color-green" label="green"/>
+                <Button v-if="b1" class="button-footer background-color-orange" label="orange"/>
+                <Button v-if="b2" class="button-footer background-color-green" label="green"/>
                 <Button class="button-footer background-color-red" label="red"/>
             </div>
         </div>
@@ -59,6 +59,7 @@ defineProps({
 }
 .modal .content .body{
     width: 100%;
+    overflow-y: auto;
     flex: 1;
 }
 .modal .content .footer{
