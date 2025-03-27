@@ -6,14 +6,14 @@
         <a v-if="label">{{ label }}</a>
         <a v-else>Logo</a>
       </div>
-      <div ref="links"  class="nav-links">
+      <div v-if="isPL" ref="links"  class="nav-links">
         <div class="sidebar-logo">
           <span class="logo-name">Menu</span>
           <i class='bx bx-x'  @click="closeSideMenu($event)" ></i>
         </div>
         <ul class="links scroll_view">
             <li >
-                <a data="show_users" href="#msu">Users</a>
+                <a href="#msu">Ta spiżarnia</a>
                 <i ref="arrowUsers" @click="openMenuUsers()" class='bx bxs-chevron-down arrow'></i>
                 <ul ref="subMenuUsers" class="sub-menu">
                     <li><a  data="show_users" href="#ns">Pokaż członków</a></li>
@@ -21,7 +21,7 @@
                 </ul>
             </li>
             <li>
-                <a data-toggle="body_spizarnie" href="#ms">Moje spiżarnie</a>
+                <a href="#ms">Moje spiżarnie</a>
                 <i ref="arrowPantries" @click="openMenuPantries()" class='bx bxs-chevron-down arrow'></i>
                 <ul ref="subMenuPantries" class="sub-menu">
                     <li><a  xdata="moja_spizarnia" xnazwa_spizarni="Dom" xid_spizarni="1" href="?s=1&&sn=Dom">Dom</a></li>
@@ -31,37 +31,26 @@
                 </ul>
             </li>
             <li >
-                <a data-toggle="body_kategorie" href="#k">Kategorie</a>
+                <a href="#k">Kategorie</a>
                 <i ref="arrowCategories" @click="openMenuCategories()" class='bx bxs-chevron-down arrow'></i>
                 <ul ref="subMenuCategories" class="sub-menu">
-                    <li><a  data="kategoria" id_kategorii="8" href="#Chemia">Chemia</a></li>
-                    <li><a  data="kategoria" id_kategorii="10" href="#Dania gotowe">Dania gotowe</a></li>
-                    <li><a  data="kategoria" id_kategorii="12" href="#Inne">Inne</a></li>
-                    <li><a  data="kategoria" id_kategorii="7" href="#Kosmetyki">Kosmetyki</a></li>
-                    <li><a  data="kategoria" id_kategorii="2" href="#Mięso">Mięso</a></li>
-                    <li><a  data="kategoria" id_kategorii="15" href="#Mrożonki">Mrożonki</a></li>
-                    <li><a  data="kategoria" id_kategorii="1" href="#Nabiał">Nabiał</a></li>
-                    <li><a  data="kategoria" id_kategorii="6" href="#Napoje">Napoje</a></li>
-                    <li><a  data="kategoria" id_kategorii="11" href="#Oleje">Oleje</a></li>
-                    <li><a  data="kategoria" id_kategorii="4" href="#Owoce">Owoce</a></li>
-                    <li><a  data="kategoria" id_kategorii="5" href="#Produkty zbożowe">Produkty zbożowe</a></li>
-                    <li><a  data="kategoria" id_kategorii="13" href="#Przekąski">Przekąski</a></li>
-                    <li><a  data="kategoria" id_kategorii="9" href="#Przyprawy">Przyprawy</a></li>
-                    <li><a  data="kategoria" id_kategorii="14" href="#Smarowidła">Smarowidła</a></li>
-                    <li><a  data="kategoria" id_kategorii="3" href="#Warzywa">Warzywa</a></li>
+                    <li v-for="(row, index) in categories" :key="row.id">
+                        <a :href="'#' + row.name_pl" :id="'category-' + row.id">{{ row.name_pl }}</a>
+                    </li>
                 </ul>
             </li>
             <li >
-                <a data-toggle="body_produkty" href="#p-2">Produkty</a>
+                <a href="#p-2">Produkty</a>
                 <i ref="arrowProducts" @click="openMenuProducts()" class='bx bxs-chevron-down arrow '></i>
                 <ul ref="subMenuProducts" class="sub-menu">
                     <li><a data-toggle="body_produkty" href="#p-2">Wszystkie produkty</a></li>
                     <li><a data-toggle="dodaj_produkt" href="#dp-2">Dodaj produkt</a></li>
                     <li><a data-toggle="historia_produktu" href="#hp-2">Historia</a></li>
-                    <li><a data-toggle="nowy_produkt" href="#np-2">Nowy produkt</a></li>             </ul>
+                    <li><a data-toggle="nowy_produkt" href="#np-2">Nowy produkt</a></li>
+                 </ul>
                 </li>
             <li >
-                <a data-toggle="body_lista_zakupow" href="#lz-2">Zakupy</a>
+                <a href="#lz-2">Zakupy</a>
                 <i ref="arrowShopping" @click="openMenuShopping()" class='bx bxs-chevron-down arrow '></i>
                 <ul ref="subMenuShopping" class="sub-menu">
                     <li><a data-toggle="body_lista_zakupow" href="#lz-2">Lista zakupów</a></li>
@@ -70,10 +59,68 @@
                 </ul>
             </li>
             <li>
-                <a data-toggle="logout" href="#logout">Wyloguj</a>
+                <a @click="logout()">Wyloguj</a>
             </li>
         </ul>
       </div>
+      <div v-else ref="links"  class="nav-links">
+        <div class="sidebar-logo">
+          <span class="logo-name">Menu</span>
+          <i class='bx bx-x'  @click="closeSideMenu($event)" ></i>
+        </div>
+        <ul class="links scroll_view">
+            <li >
+                <a href="#msu">This pantry</a>
+                <i ref="arrowUsers" @click="openMenuUsers()" class='bx bxs-chevron-down arrow'></i>
+                <ul ref="subMenuUsers" class="sub-menu">
+                    <li><a  data="show_users" href="#ns">Show users</a></li>
+                    <li><a  data="zaproszenia" href="#ns">Invitations</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#ms">My pantries</a>
+                <i ref="arrowPantries" @click="openMenuPantries()" class='bx bxs-chevron-down arrow'></i>
+                <ul ref="subMenuPantries" class="sub-menu">
+                    <li><a  xdata="moja_spizarnia" xnazwa_spizarni="Dom" xid_spizarni="1" href="?s=1&&sn=Dom">first</a></li>
+                    <li><a  xdata="moja_spizarnia" xnazwa_spizarni="Holandia" xid_spizarni="2" href="?s=2&&sn=Holandia">second</a></li>
+                    <li><a  xdata="moja_spizarnia" xnazwa_spizarni="xxx" xid_spizarni="6" href="?s=6&&sn=xxx">last</a></li>
+                    <li><a  data-toggle="nowa_spizarnia"  href="#ns">New pantry</a></li>
+                </ul>
+            </li>
+            <li >
+                <a href="#k">Categories</a>
+                <i ref="arrowCategories" @click="openMenuCategories()" class='bx bxs-chevron-down arrow'></i>
+                <ul ref="subMenuCategories" class="sub-menu">
+                    <li v-for="(row, index) in categories" :key="row.id">
+                        <a :href="'#' + row.name" :id="'category-' + row.id">{{ row.name }}</a>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="#p-2">Products</a>
+                <i ref="arrowProducts" @click="openMenuProducts()" class='bx bxs-chevron-down arrow '></i>
+                <ul ref="subMenuProducts" class="sub-menu">
+                    <li><a data-toggle="body_produkty" href="#p-2">All products</a></li>
+                    <li><a data-toggle="dodaj_produkt" href="#dp-2">Add product</a></li>
+                    <li><a data-toggle="historia_produktu" href="#hp-2">Products history</a></li>
+                    <li><a data-toggle="nowy_produkt" href="#np-2">New product</a></li>
+                 </ul>
+                </li>
+            <li >
+                <a href="#lz-2">Shopping</a>
+                <i ref="arrowShopping" @click="openMenuShopping()" class='bx bxs-chevron-down arrow '></i>
+                <ul ref="subMenuShopping" class="sub-menu">
+                    <li><a data-toggle="body_lista_zakupow" href="#lz-2">Shopping list</a></li>
+                    <li><a data-toggle="body_zakupy" href="#dlz-2">Add product to list</a></li>
+                    <li><a data-toggle="body_historia_zakupow" href="#hlz-2">Shopping history</a></li>
+                </ul>
+            </li>
+            <li>
+                <a @click="logout()">Logout</a>
+            </li>
+        </ul>
+      </div>
+
       <div ref="searchBox"class="search-box">
         <i ref="searchBoxIcon"  @click="openSearchBox()" class='bx bx-search'></i>
         <div ref="searchBoxInput" class="input-box">
@@ -86,6 +133,8 @@
   </template>
 
   <script setup>
+import axios from 'axios';
+
   defineProps({
     label: String,
   });
@@ -94,6 +143,9 @@
 export default {
     data() {
         return {
+            isPL: false,
+            categories: [],
+            categoriesDownloaded: false,
             openedMenuUsers: false,
             openedMenuPantries: false,
             openedMenuProducts: false,
@@ -104,6 +156,33 @@ export default {
         };
     },
     methods:{
+        logout(){
+            axios.post(route('logout'))
+            .then(() => {
+                window.location.href = '/login'; // Przekierowanie po wylogowaniu
+            })
+            .catch(error => {
+                console.error('Błąd wylogowania:', error);
+            });
+        },
+        checkLanguage() {
+            const language = navigator.language || navigator.userLanguage;
+            this.isPL = language.startsWith('pl');
+        },
+        getCategories(){
+            if(!this.categoriesDownloaded){
+                axios.get('/api/categories')
+                    .then(response => {
+                        this.categories = response.data;
+                        this.categoriesDownloaded = true;
+                        console.log(this.categories);
+                    })
+                    .catch(error => {
+                        console.error('Error while processing:', error);
+                    });
+            }
+
+        },
         openSearchBox(){
             const navbar = this.$refs.navbar;
             const searchBoxIcon = this.$refs.searchBoxIcon;
@@ -230,7 +309,8 @@ export default {
         }
     },
     mounted() {
-    //document.addEventListener('click', this.closeSideMenu);
+        this.getCategories();
+        this.checkLanguage();
     },
     beforeUnmount() {
     //document.removeEventListener('click', this.closeSideMenu);
@@ -289,6 +369,7 @@ nav .navbar .links li a{
   color: #fff;
   font-size: 15px;
   font-weight: 500;
+  cursor: pointer;
 }
 
 

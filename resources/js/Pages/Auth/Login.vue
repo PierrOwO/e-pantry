@@ -3,8 +3,8 @@ import GuestLayout from '@/Layouts/GuestLayout.vue';
 import Button from '@/Components/Button.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
-import Link from '@/Components/Link.vue';
-import { Head, useForm } from '@inertiajs/vue3';
+//import Link from '@/Components/Link.vue';
+import { Head, Link, useForm } from '@inertiajs/vue3';
 
 defineProps({
     canResetPassword: {
@@ -59,8 +59,8 @@ const submit = () => {
             </div>
             <Button class="background-color-maroon background-color-maroon-hover width-75 margin-bottom-10px margin-top-10px" label="Login"/>
             <div class="links-div">
-                <Link class="margin-right-auto display-inline color-maroon color-maroon-hover font-weight-500" label="Reset password"/>
-                <Link class="margin-left-auto display-inline color-maroon color-maroon-hover font-weight-bold" label="Register"/>
+                <Link class="margin-right-auto display-inline color-maroon color-maroon-hover font-weight-500" >Reset password </Link>
+                <Link class="margin-left-auto display-inline color-maroon color-maroon-hover font-weight-bold" :href="route('register')">Register</Link>
 
             </div>
         </form>

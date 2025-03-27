@@ -10,7 +10,7 @@ class CategoriesController extends Controller
 {
     public function index()
     {
-        return response()->json(Category::all(), 200);
+        return response()->json(Category::orderBy('name_pl', 'ASC')->get(), status: 200);
     }
 
 
