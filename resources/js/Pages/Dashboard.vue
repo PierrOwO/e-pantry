@@ -13,7 +13,9 @@ import ModalBody from '@/Components/ModalBody.vue';
 
     <AppLayout>
         <Modal title="modal title" b1 b2>
-            <ModalBody body="1" />
+            <ModalBody :body="1"/>
         </Modal>
     </AppLayout>
 </template>
+<style scoped>
+</style>

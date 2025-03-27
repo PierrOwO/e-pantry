@@ -61,6 +61,8 @@ defineProps({
     width: 100%;
     overflow-y: auto;
     flex: 1;
+    text-align: center;
+
 }
 .modal .content .footer{
     width: 100%;
